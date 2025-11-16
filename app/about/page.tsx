@@ -1,6 +1,8 @@
 "use client";
 
 import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
 // --- 1. Mock lucide-react icons for preview ---
 const mockIcon = (path: string) => (
@@ -52,9 +54,9 @@ const TimelineItem = ({ step, isLast }: { step: (typeof timelineSteps)[0], isLas
             {step.icon}
           </div>
           {/* Updated to match home page styling */}
-          <div className={`bg-white p-6 rounded-2xl shadow-xl border border-gray-100 ${isLeft ? 'text-left' : 'text-right'}`}>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
-            <p className="text-gray-600">{step.description}</p>
+          <div className={`bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/20 ${isLeft ? 'text-left' : 'text-right'}`}>
+            <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
+            <p className="text-white/90">{step.description}</p>
           </div>
         </div>
       </div>
@@ -65,12 +67,12 @@ const TimelineItem = ({ step, isLast }: { step: (typeof timelineSteps)[0], isLas
 
 function AppFlowTimeline() {
   return (
-    <div className="bg-white text-gray-900 p-8">
+    <div className="p-8">
       <div className="max-w-4xl mx-auto">
         {/* Updated to match home page headline styling */}
         <h1 className="text-5xl lg:text-6xl font-bold text-center mb-16">
-          <span className="text-sky-400">How Flago</span>
-          <span className="text-gray-900"> Works</span>
+          <span className="text-white">How Flago</span>
+          <span className="text-white"> Works</span>
         </h1>
         <div className="relative flex flex-col gap-16">
           {/* Updated to match home page color scheme */}
@@ -101,25 +103,46 @@ function AppFlowTimeline() {
   );
 }
 
-// --- 4. Team Member Card Component ---
-// Updated to match home page styling
-const TeamCard = ({ name, role }: { name: string, role: string }) => (
-  <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 flex flex-col items-center text-center">
-    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-sky-400 to-purple-400 flex items-center justify-center text-white mb-4">
-      <div className="w-12 h-12">
-        {UserIcon}
+// --- 4. Team Member Card Component (Original Grid) ---
+const TeamCard = ({ name, role, href, image }: { name: string, role: string, href?: string, image?: string }) => {
+  const cardContent = (
+    <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/20 flex flex-col items-center text-center hover:shadow-2xl transition-shadow">
+      <div className="w-24 h-24 rounded-full overflow-hidden mb-4 flex items-center justify-center bg-gradient-to-br from-sky-400 to-purple-400">
+        {image ? (
+          <Image
+            src={image}
+            alt={name}
+            width={96}
+            height={96}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="w-12 h-12 text-white">
+            {UserIcon}
+          </div>
+        )}
       </div>
+      <h3 className="text-xl font-bold text-white">{name}</h3>
+      <p className="text-sky-300 font-medium">{role}</p>
     </div>
-    <h3 className="text-xl font-bold text-gray-900">{name}</h3>
-    <p className="text-sky-400 font-medium">{role}</p>
-  </div>
-);
+  );
+
+  if (href) {
+    return (
+      <Link href={href} target="_blank" rel="noopener noreferrer" className="block">
+        {cardContent}
+      </Link>
+    );
+  }
+
+  return cardContent;
+};
 
 // --- 5. Main About Page Component ---
 // Updated to match home page styling and fonts
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       {/* Main Content Area - matching home page container */}
       <div className="container mx-auto px-6 py-16">
         
@@ -128,12 +151,12 @@ export default function AboutPage() {
           {/* Updated to match home page headline styling */}
           <div className="space-y-2 mb-6">
             <h1 className="text-5xl lg:text-6xl font-bold">
-              <span className="text-sky-400">About</span>
-              <span className="text-gray-900"> Flago</span>
+              <span className="text-white">About</span>
+              <span className="text-white"> Flago</span>
             </h1>
           </div>
           {/* Updated to match home page description styling */}
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-white/90 max-w-3xl mx-auto leading-relaxed">
             Flago was born from one simple question: "What should we watch tonight?". 
             We're a team of students passionate about using AI to solve everyday problems, 
             and ending the nightly movie debate is our first mission.
@@ -152,15 +175,15 @@ export default function AboutPage() {
           {/* Updated to match home page headline styling */}
           <div className="space-y-2 mb-12 text-center">
             <h2 className="text-5xl lg:text-6xl font-bold">
-              <span className="text-sky-400">Meet the</span>
-              <span className="text-gray-900"> Team</span>
+              <span className="text-white">Meet the</span>
+              <span className="text-white"> Team</span>
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <TeamCard name="Aditya Shetty" role="Frontend & ELO Logic" />
-            <TeamCard name="Sathya Sriram" role="AI & Backend" />
-            <TeamCard name="Ashita Binte Amir" role="UI/UX Design" />
-            <TeamCard name="Ojas Srivastav" role="IT Support" />
+            <TeamCard name="Aditya Shetty" role="Frontend & ELO Logic" href="https://www.linkedin.com/in/adityashetty06/" image="/aditya.jpg" />
+            <TeamCard name="Ashita Binte Amir" role="UI/UX Design" href="https://www.linkedin.com/in/ashita-binte-amir-900695293/" image="/ashita.jpg" />
+            <TeamCard name="Sathya Sriram" role="AI & Backend" href="https://www.linkedin.com/in/sathya-sriram/" image="/sathya.jpg" />
+            <TeamCard name="Ojas Srivastava" role="Support Role" href="https://www.linkedin.com/in/0jas0jas/" image="/ojas.jpg" />
           </div>
         </section>
 

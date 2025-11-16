@@ -20,6 +20,77 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+/**
+ * Wave Background Component
+ * Rotating circular waves for background decoration
+ */
+const WaveBackground = () => {
+  return (
+    <div 
+      className="fixed top-0 left-0 pointer-events-none z-0"
+      style={{ 
+        transform: 'rotate(80deg)',
+        width: '100%',
+        height: '100%',
+      }}
+    >
+      {/* Wave One */}
+      <div
+        className="wave-drift-1"
+        style={{
+          position: 'absolute',
+          top: '3%',
+          left: '10%',
+          opacity: 0.3,
+          background: '#001a33',
+          width: '1500px',
+          height: '1300px',
+          marginLeft: '-150px',
+          marginTop: '-250px',
+          transformOrigin: '50% 48%',
+          borderRadius: '43%',
+        }}
+      />
+      
+      {/* Wave Two */}
+      <div
+        className="wave-drift-2"
+        style={{
+          position: 'absolute',
+          top: '3%',
+          left: '10%',
+          opacity: 0.2,
+          background: '#000000',
+          width: '1500px',
+          height: '1300px',
+          marginLeft: '-150px',
+          marginTop: '-250px',
+          transformOrigin: '50% 48%',
+          borderRadius: '43%',
+        }}
+      />
+      
+      {/* Wave Three */}
+      <div
+        className="wave-drift-3"
+        style={{
+          position: 'absolute',
+          top: '3%',
+          left: '10%',
+          backgroundColor: '#003366',
+          opacity: 0.25,
+          width: '1500px',
+          height: '1300px',
+          marginLeft: '-150px',
+          marginTop: '-250px',
+          transformOrigin: '50% 48%',
+          borderRadius: '43%',
+        }}
+      />
+    </div>
+  );
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,17 +98,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.className} antialiased`}>
+      <body 
+        className={`${geistSans.className} antialiased`}
+        style={{ 
+          backgroundColor: '#001122', 
+          overflowX: 'hidden', 
+          overflowY: 'auto',
+          minHeight: '100vh'
+        }}
+      >
+        <WaveBackground />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          {/* <FlagoNavbar /> */}
-          {children}
+          <div className="relative z-10">
+            <FlagoNavbar />
+            {children}
+          </div>
         </ThemeProvider>
-
       </body>
     </html>
   );

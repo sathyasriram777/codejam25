@@ -95,6 +95,33 @@
     }
   }
   
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes spin-slow-reverse {
+    from {
+      transform: rotate(360deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
+  
+  @keyframes wave-drift {
+    from { 
+      transform: rotate(0deg); 
+    }
+    to { 
+      transform: rotate(360deg); 
+    }
+  }
+  
   .animate-pulse-slow {
     animation: pulse-slow 4s ease-in-out infinite;
   }
@@ -106,5 +133,25 @@
   .animate-bounce-slow-delayed {
     animation: bounce-slow-delayed 3.5s ease-in-out infinite;
     animation-delay: 0.5s;
+  }
+  
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+  
+  .animate-spin-slow-reverse {
+    animation: spin-slow-reverse 15s linear infinite;
+  }
+  
+  .wave-drift-1 {
+    animation: wave-drift 7000ms infinite linear;
+  }
+  
+  .wave-drift-2 {
+    animation: wave-drift 3000ms infinite linear;
+  }
+  
+  .wave-drift-3 {
+    animation: wave-drift 7500ms infinite linear;
   }
 }

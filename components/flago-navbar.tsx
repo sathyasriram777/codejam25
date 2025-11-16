@@ -22,7 +22,7 @@ export default function FlagoNavbar() {
   };
 
   return (
-    <div className="relative w-full bg-white">
+    <div className="relative w-full bg-transparent z-50">
       {/* Desktop Navigation */}
       <div className="hidden lg:flex items-center justify-center py-4 px-6">
         {/* Gradient Border Wrapper */}
@@ -37,45 +37,35 @@ export default function FlagoNavbar() {
           <div className="
             relative w-full
             flex items-center justify-between
-            bg-white rounded-full
+            bg-white/10 backdrop-blur-md rounded-full
+            border border-white/20
             px-12 py-4
           ">
           {/* Left Section - Logo */}
           <div className="flex items-center space-x-4">
             <Link href="/home" className="flex items-center space-x-3 group cursor-pointer">
-              {/* Geometric Icon/Crystal with hover animation */}
-              <div className="relative w-8 h-8 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
-                <div className="
-                  absolute inset-0
-                  bg-gradient-to-br from-purple-400 via-pink-400 to-sky-400
-                  rounded-lg
-                  transform rotate-45
-                  opacity-80
-                  transition-all duration-300
-                  group-hover:opacity-100
-                  group-hover:shadow-lg group-hover:shadow-purple-400/50
-                "></div>
-                <div className="
-                  absolute inset-0
-                  bg-gradient-to-tr from-sky-400 via-pink-400 to-purple-400
-                  rounded-lg
-                  transform -rotate-45
-                  opacity-60
-                  transition-all duration-300
-                  group-hover:opacity-80
-                "></div>
+              {/* Logo Image with hover animation */}
+              <div className="relative w-15 h-15 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                <Image
+                  src="/flago-high-resolution-logo-grayscale-transparent.png"
+                  alt="Flago Logo"
+                  width={100}
+                  height={100}
+                  className="object-contain"
+                  priority
+                />
               </div>
               
               {/* Logo Text with hover effect */}
               <div className="flex flex-col">
-                <span className="text-base font-bold text-gray-900 leading-tight transition-colors duration-300 group-hover:text-sky-500">
+                <span className="text-base font-bold text-white leading-tight transition-colors duration-300 group-hover:text-sky-300">
                   Flago
                 </span>
               </div>
             </Link>
             
             {/* Vertical Separator */}
-            <div className="h-6 w-px bg-gray-300"></div>
+            <div className="h-6 w-px bg-white/30"></div>
           </div>
 
           {/* Center Section - Navigation Links */}
@@ -86,22 +76,22 @@ export default function FlagoNavbar() {
                 <Link
                   key={`nav-link-${idx}`}
                   href={item.link}
-                  className="
-                    group
-                    relative
-                    text-sm font-medium text-gray-900
-                    whitespace-nowrap
-                    px-4 py-2
-                    transition-all duration-300 ease-out
-                    hover:scale-110
-                    hover:text-sky-500
-                  "
+               className="
+                 group
+                 relative
+                 text-sm font-medium text-white
+                 whitespace-nowrap
+                 px-4 py-2
+                 transition-all duration-300 ease-out
+                 hover:scale-110
+                 hover:text-white
+               "
                 >
                   {/* Hover Background - Subtle rounded background */}
                   <div className="
                     absolute inset-0
-                    bg-sky-100/0
-                    group-hover:bg-sky-100/40
+                    bg-black/0
+                    group-hover:bg-black/30
                     rounded-lg
                     scale-95 group-hover:scale-100
                     transition-all duration-300 ease-out
@@ -112,7 +102,7 @@ export default function FlagoNavbar() {
                   {active && (
                     <div className="
                       absolute inset-0
-                      bg-gradient-to-br from-purple-200/60 via-pink-200/60 to-purple-200/60
+                      bg-gradient-to-br from-sky-900/40 via-blue-900/40 to-sky-900/40
                       rounded-md
                       transform rotate-45
                       -z-10
@@ -128,7 +118,7 @@ export default function FlagoNavbar() {
                   {/* Underline effect on hover */}
                   <div className="
                     absolute bottom-0 left-0 right-0 h-0.5
-                    bg-gradient-to-r from-sky-400 to-purple-400
+                    bg-gradient-to-r from-sky-600 to-blue-600
                     transform scale-x-0 group-hover:scale-x-100
                     transition-transform duration-300 ease-out
                     -z-0
@@ -141,7 +131,7 @@ export default function FlagoNavbar() {
           {/* Right Section - Get Started Button */}
           <div className="flex items-center">
             <Link
-              href="/form"
+              href="/party/create"
               className="
                 group
                 relative
@@ -160,7 +150,7 @@ export default function FlagoNavbar() {
               {/* Animated background gradient on hover */}
               <div className="
                 absolute inset-0
-                bg-gradient-to-r from-sky-500 via-purple-500 to-pink-500
+                bg-gradient-to-r from-sky-700 via-blue-700 to-sky-800
                 opacity-0 group-hover:opacity-100
                 transition-opacity duration-300
               "></div>
@@ -174,7 +164,7 @@ export default function FlagoNavbar() {
               "></div>
               
               {/* Text and icon */}
-              <span className="relative z-10">Get Started</span>
+              <span className="relative z-10">Create Room</span>
               <svg 
                 className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:translate-x-1" 
                 fill="none" 
@@ -195,25 +185,26 @@ export default function FlagoNavbar() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="lg:hidden flex items-center justify-between px-4 py-4 bg-white border-b border-gray-200">
-        <div className="flex items-center space-x-3">
+      <div className="lg:hidden flex items-center justify-between px-4 py-4 bg-white/10 backdrop-blur-md border-b border-white/20">
+        <Link href="/home" className="flex items-center space-x-3">
           {/* Mobile Logo */}
-          <div className="relative w-6 h-6">
-            <div className="
-              absolute inset-0
-              bg-gradient-to-br from-purple-400 via-pink-400 to-sky-400
-              rounded-lg
-              transform rotate-45
-              opacity-80
-            "></div>
+          <div className="relative w-8 h-8 flex items-center justify-center">
+            <Image
+              src="/flago-high-resolution-logo-grayscale-transparent.png"
+              alt="Flago Logo"
+              width={32}
+              height={32}
+              className="object-contain"
+              priority
+            />
           </div>
-          <span className="text-lg font-bold text-gray-900">Flago</span>
-        </div>
+          <span className="text-lg font-bold text-white">Flago</span>
+        </Link>
 
         {/* Mobile Menu Toggle */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="p-2 text-gray-900"
+          className="p-2 text-white"
         >
           {isMobileMenuOpen ? (
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -236,7 +227,7 @@ export default function FlagoNavbar() {
                 key={`mobile-link-${idx}`}
                 href={item.link}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-gray-900 font-medium py-2"
+                className="text-white font-medium py-2"
               >
                 {item.name}
               </Link>
